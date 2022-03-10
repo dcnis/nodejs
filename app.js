@@ -9,6 +9,7 @@ const shopRoutes = require('./routes/home');
 // Create Express server
 const app = express();
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(rootDir, 'public')));
 

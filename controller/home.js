@@ -3,6 +3,7 @@ exports.home = (req, res) => {
 };
 
 exports.sendReport = (req, res) => {
+    console.log(req.body)
     res.render('success');
 };
 
