@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 
 const rootDir = require('./util/path');
 const homeRouter = require('./routes/home');
-const userprofileRoutes = require('./routes/userprofile');
 const shopRoutes = require('./routes/home');
 
 // Create Express server
@@ -18,7 +17,6 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 // routes
-app.use(userprofileRoutes);
 app.use(homeRouter);
 
 
