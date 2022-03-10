@@ -1,13 +1,12 @@
 const path = require('path');
-
 const express = require('express');
 
 const rootDir = require('../util/path');
+const errorController = require('../controller/error');
 
+
+// create router
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.sendFile(path.join(rootDir, 'views', 'shop.html'));
-});
 
-module.exports = router;
+router.use(errorController.error404);
