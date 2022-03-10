@@ -3,8 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const rootDir = require('./util/path');
-const homeRouter = require('./routes/home');
-const errorRouter = require('./routes/error');
+const homeRouter = require('./api/routes/homeRoute');
+const errorRouter = require('./api/routes/errorRoute');
 
 // Create Express server
 const app = express();

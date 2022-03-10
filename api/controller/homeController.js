@@ -1,3 +1,5 @@
+const env = require('../../config/env');
+
 exports.home = (req, res) => {
     res.render('home');
 };

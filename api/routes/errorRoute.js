@@ -1,6 +1,6 @@
 const express = require('express');
 
-const errorController = require('../controller/error');
+const errorController = require('../controller/errorController');
 
 
 // create router
