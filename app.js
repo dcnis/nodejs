@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const rootDir = require('./util/path');
 const homeRouter = require('./routes/home');
-const shopRoutes = require('./routes/home');
+const errorRouter = require('./routes/error');
 
 // Create Express server
 const app = express();
@@ -19,10 +19,6 @@ app.set('views', 'views');
 
 // routes
 app.use(homeRouter);
-
-
-app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-});
+app.use(errorRouter);
 
 app.listen(3000);
