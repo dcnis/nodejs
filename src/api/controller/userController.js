@@ -8,8 +8,13 @@ exports.getAll = (req, res) => {
 };
 
 exports.addUser = (req, res) => {
-    const userCreationResponse = userservice.addUser(req.body);
-    res.json(userCreationResponse);
+    return userservice.addUser(req.body)
+        .then((response) => {
+            return res.json(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 };
 
 exports.getUserByUserId = (req, res) => {
