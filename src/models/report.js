@@ -13,7 +13,7 @@ module.exports = class Report {
     save(){
         // save report to database
         const reports = db.execute('SELECT * FROM reports');
-        console.log(reports);
+        // console.log(reports);
     };
 
     delete() {

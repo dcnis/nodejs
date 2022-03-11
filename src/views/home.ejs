@@ -49,12 +49,12 @@
             <form action="/sendReport" method="POST">
                 <div class="mb-3">
                     <label for="name=" class="form-label">Name / 您的姓名</label>
-                    <input class="form-control" name="name" type="text" placeholder="请输入您姓名 / Please enter your full name" aria-label="default input example">
+                    <input class="form-control" name="name" type="text" placeholder="请输入您姓名 / Please enter your full name" value = "<%= cookie.name %>" aria-label="default input example">
                 </div>
 
                 <div class="mb-3">
                     <label for="roomnumber" class="form-label">Room number / 您的房号</label>
-                    <input class="form-control" type="number" name="roomnumber" placeholder="请输入您房号 / Please enter your room number" aria-label="default input example">
+                    <input class="form-control" type="number" name="roomnumber" placeholder="请输入您房号 / Please enter your room number" value = "<%= cookie.roomnr %>" aria-label="default input example">
                 </div>
 
                 <div class="mb-3">
@@ -101,7 +101,7 @@
                 <div class="mb-3">
                     <label for="symptoms" class="form-label">Do you have any physical symptoms? / 你是否有身体不适的病状?</label>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="symptoms" id="0" value="healthy" checked>
+                    <input class="form-check-input" type="radio" name="symptoms" id="0" value="healthy">
                     <label class="form-check-label" for="flexRadioDefault1">
                       无病状 healthy
                     </label>

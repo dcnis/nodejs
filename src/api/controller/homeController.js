@@ -5,18 +5,28 @@ exports.home = (req, res) => {
 
     db.execute('SELECT * FROM Reports')
         .then((ans) => {
-            console.log(ans[0]);
+            // console.log(ans[0]);
         })
         .catch((err) => {
-            console.log(err);
+            // console.log(err);
         })
 
 
-    res.render('home');
+    const cookie = {};
+    if(req.cookies.app_name){
+        cookie.name = req.cookies.app_name;
+    }
+    if(req.cookies.app_roomnr){
+        cookie.roomnr = req.cookies.app_roomnr;
+    }
+    res.render('home', {cookie});
 };
 
 exports.sendReport = (req, res) => {
-    console.log(req.body)
+
+    res.cookie('app_name', req.body.name);
+    res.cookie('app_roomnr', req.body.roomnumber);
+    
     res.render('success');
 };
 
