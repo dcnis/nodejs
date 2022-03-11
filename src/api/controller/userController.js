@@ -1,19 +1,20 @@
 const userservice = require('../../services/userService');
 
 exports.getAll = (req, res) => {
-    const allUser = userservice.getAll()
+    userservice.getAll()
         .then((allUser) => {
             res.json(allUser);
-        });
+    });
 };
 
 exports.addUser = (req, res) => {
-    return userservice.addUser(req.body)
+    userservice.addUser(req.body)
         .then((response) => {
             return res.json(response);
         })
         .catch((error) => {
             console.log(error);
+            return res.json(error);
         });
 };
 
