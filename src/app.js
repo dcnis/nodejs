@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const rootDir = require('./util/path');
 const homeRouter = require('./api/routes/homeRoute');
 const errorRouter = require('./api/routes/errorRoute');
+const routes = require('./api/routes');
 
 // Create Express server
 const app = express();
@@ -19,6 +20,7 @@ app.set('views', rootDir + '/views');
 
 // routes
 app.use(homeRouter);
+app.use(routes);
 app.use(errorRouter);
 
 module.exports = app;

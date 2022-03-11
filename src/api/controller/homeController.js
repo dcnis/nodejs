@@ -5,7 +5,7 @@ exports.home = (req, res) => {
 
     db.execute('SELECT * FROM Reports')
         .then((ans) => {
-            console.log(ans);
+            console.log(ans[0]);
         })
         .catch((err) => {
             console.log(err);
