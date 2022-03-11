@@ -1,0 +1,29 @@
+DROP DATABASE IF EXISTS nodedb;
+
+CREATE DATABASE nodedb;
+
+USE nodedb;
+
+CREATE TABLE Users (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    roomnumber INTEGER
+);
+
+CREATE TABLE Symptoms (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(255)
+);
+
+CREATE TABLE Reports (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    userId INTEGER NOT NULL,
+    day INTEGER NOT NULL,
+    temperature DOUBLE NOT NULL,
+    symptom INTEGER NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users (id),
+    FOREIGN KEY (symptom) REFERENCES Symptoms (id)
+);
+

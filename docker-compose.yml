@@ -7,11 +7,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DB}
+    volumes:
+      - "./src/config/mysql/scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./src/config/mysql/scripts/data.sql:/docker-entrypoint-initdb.d/2.sql"
+      - "./src/config/mysql/scripts/mycustom.cnf:/etc/mysql/conf.d/custom.cnf"
     ports:
       - "3306:3306"
 
   app:
     container_name: app
+    restart: always
     env_file:
       - .env
     build:
@@ -19,6 +24,8 @@ services:
     image: myappimage
     ports:
       - "3000:3000"
+    volumes:
+      - "./src:/usr/src/app/src"
     depends_on:
       - mysqldb
 

@@ -1,9 +1,9 @@
 const env = require('../../config/env');
-const db = require('../../config/database');
+const db = require('../../config/mysql/database');
 
 exports.home = (req, res) => {
 
-    db.execute('SELECT * FROM reports')
+    db.execute('SELECT * FROM Reports')
         .then((ans) => {
             console.log(ans);
         })
