@@ -15,10 +15,10 @@ app.use(express.static(path.join(rootDir, 'public')));
 
 // Set template engine
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+app.set('views', rootDir + '/views');
 
 // routes
 app.use(homeRouter);
 app.use(errorRouter);
 
-app.listen(3000);
+module.exports = app;
