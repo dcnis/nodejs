@@ -1,6 +1,17 @@
 const env = require('../../config/env');
+const db = require('../../config/database');
 
 exports.home = (req, res) => {
+
+    db.execute('SELECT * FROM reports')
+        .then((ans) => {
+            console.log(ans);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
+
     res.render('home');
 };
 
