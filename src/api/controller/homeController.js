@@ -35,7 +35,9 @@ homeController.sendReport = (req, res, next) => {
         if (err) {
             console.log('FEHLER ' + error);
         }
-        res.render('success');
+
+        const isAuth = req.session.isAuthenticated;
+        res.render('success', {isAuth});
     });
 };
 
