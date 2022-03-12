@@ -1,4 +1,3 @@
-import redis from 'redis';
 import connectRedis from 'connect-redis';
 import session from 'express-session';
 import path from 'path';
@@ -6,6 +5,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import csrf from 'csurf';
 
+import redis from 'redis';
 import { REDIS_PASSWORD } from './config/env.js';
 import rootDir from './util/path.js';
 import routes from './api/routes.js';

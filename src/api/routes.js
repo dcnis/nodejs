@@ -32,6 +32,7 @@ router.post('/login', loginController.login);
 /* signupController */
 router.get('/signup', signupController.signupPage);
 router.post('/signup', signupController.signup);
+router.get('/signupVerification/:token', signupController.signupVerification);
 
 /* homeController */
 router.post('/sendReport', homeController.sendReport);

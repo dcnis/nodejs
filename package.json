@@ -19,6 +19,7 @@
     "express": "^4.16.1",
     "express-session": "^1.17.2",
     "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.2",
     "redis": "^3.0.2"
   },
   "devDependencies": {
