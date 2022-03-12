@@ -1,13 +1,11 @@
-const express = require('express');
+import express from 'express';
 
-const errorController = require('../controller/errorController');
+import errorController from '../controller/errorController.js';
 
 
 // create router
 const router = express.Router();
 
-
 router.use(errorController.error404);
 
-
-module.exports = router;
+export default router;

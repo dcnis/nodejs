@@ -1,6 +1,8 @@
-const db = require('../config/mysql/database');
+import db from '../config/mysql/database.js';
 
-exports.addReport = (report) => {
+const reportService = {};
+
+reportService.addReport = (report) => {
     return db.execute('INSERT INTO Reports (userId, day, temperature, symptom) VALUES (?, ?, ?, ?)',
             [report.userId, report.day, report.temperature, report.symptom])
         .then((response) => {
@@ -12,7 +14,7 @@ exports.addReport = (report) => {
         });
 };
 
-exports.getAll = () => {
+reportService.getAll = () => {
     return db.execute(`SELECT r.userId, r.day, r.temperature, s.description FROM Reports r
             INNER JOIN Symptoms s ON r.symptom=s.id`)
         .then((data) => {
@@ -23,3 +25,5 @@ exports.getAll = () => {
             return Promise.resolve([]);
         });
 };
+
+export default reportService;

@@ -1,6 +1,6 @@
-const db = require('../config/database');
+import db from '../config/database.js';
 
-module.exports = class Report {
+export default class Report {
     constructor(id, name, roomnumber, day, temperature, symptoms){
         this.id = id;
         this.name = name;
@@ -27,7 +27,5 @@ module.exports = class Report {
     static getAllByRoomnumber() {
 
     }
-
-
 
 };

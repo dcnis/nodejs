@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 
-const userController = require('./controller/userController');
-const reportController = require('./controller/reportController');
+import userController from './controller/userController.js';
+import reportController from './controller/reportController.js';
 
 const router = express.Router();
 
@@ -15,4 +15,4 @@ router.get('/user/:userId', userController.getUserByUserId);
 router.post('/report/add', reportController.addReport);
 router.get('/report/getAll', reportController.getAll);
 
-module.exports = router;
+export default router;

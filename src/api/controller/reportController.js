@@ -1,13 +1,15 @@
-const reportservice = require('../../services/reportService');
+import reportservice from '../../services/reportService.js';
 
-exports.getAll = (req, res) => {
+const reportController = {};
+
+reportController.getAll = (req, res) => {
     reportservice.getAll()
         .then((allReports) => {
             res.json(allReports);
     });
 };
 
-exports.addReport = (req, res) => {
+reportController.addReport = (req, res) => {
     return reportservice.addReport(req.body)
         .then((response) => {
             return res.json(response);
@@ -17,21 +19,21 @@ exports.addReport = (req, res) => {
         });
 };
 
-exports.getReportById = (req, res) => {
+reportController.getReportById = (req, res) => {
 
 };
 
-exports.getReportsByUserId = (req, res) => {
+reportController.getReportsByUserId = (req, res) => {
     
 };
 
 
-exports.getReportsByUserEmail = (req, res) => {
+reportController.getReportsByUserEmail = (req, res) => {
     
 };
 
-exports.deleteReportById = (req, res) => {
+reportController.deleteReportById = (req, res) => {
     
 };
 
-
+export default reportController;

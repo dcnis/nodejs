@@ -1,13 +1,15 @@
-const userservice = require('../../services/userService');
+import userservice from '../../services/userService.js';
 
-exports.getAll = (req, res) => {
+const userController = {};
+
+userController.getAll = (req, res) => {
     userservice.getAll()
         .then((allUser) => {
             res.json(allUser);
     });
 };
 
-exports.addUser = (req, res) => {
+userController.addUser = (req, res) => {
     userservice.addUser(req.body)
         .then((response) => {
             return res.json(response);
@@ -18,21 +20,22 @@ exports.addUser = (req, res) => {
         });
 };
 
-exports.getUserByUserId = (req, res) => {
+userController.getUserByUserId = (req, res) => {
 
 };
 
-exports.getUserByEmail = (req, res) => {
+userController.getUserByEmail = (req, res) => {
     
 };
 
 
-exports.deleteUserById = (req, res) => {
+userController.deleteUserById = (req, res) => {
     
 };
 
-exports.deleteUserByEmail = (req, res) => {
+userController.deleteUserByEmail = (req, res) => {
     
 };
 
+export default userController;
 

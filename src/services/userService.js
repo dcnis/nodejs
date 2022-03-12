@@ -1,6 +1,8 @@
-const db = require('../config/mysql/database');
+import db from '../config/mysql/database.js';
 
-exports.addUser = (user) => {
+const userService = {};
+
+userService.addUser = (user) => {
     return db.execute('INSERT INTO Users (first_name, last_name, email, roomnumber) VALUES (?, ?, ?, ?)',
             [user.first_name, user.last_name, user.email, user.roomnumber])
         .then((response) => {
@@ -12,7 +14,7 @@ exports.addUser = (user) => {
         });
 };
 
-exports.getAll = () => {
+userService.getAll = () => {
     return db.execute('SELECT * FROM Users')
         .then((data) => {
             return data[0];
@@ -22,3 +24,5 @@ exports.getAll = () => {
             return Promise.resolve([]);
         });
 };
+
+export default userService;

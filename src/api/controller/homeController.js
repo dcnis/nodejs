@@ -1,7 +1,8 @@
-const env = require('../../config/env');
-const db = require('../../config/mysql/database');
+import db from '../../config/mysql/database.js';
 
-exports.home = (req, res) => {
+const homeController = {};
+
+homeController.home = (req, res) => {
 
     db.execute('SELECT * FROM Reports')
         .then((ans) => {
@@ -22,7 +23,7 @@ exports.home = (req, res) => {
     res.render('home', {cookie});
 };
 
-exports.sendReport = (req, res) => {
+homeController.sendReport = (req, res) => {
 
     res.cookie('app_name', req.body.name);
     res.cookie('app_roomnr', req.body.roomnumber);
@@ -30,11 +31,12 @@ exports.sendReport = (req, res) => {
     res.render('success');
 };
 
-exports.login = (req, res) => {
+homeController.login = (req, res) => {
     return res.render('login');
 };
 
-exports.logout = (req, res) => {
+homeController.logout = (req, res) => {
     return res.render('logout');
 };
 
+export default homeController;
