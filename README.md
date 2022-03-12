@@ -15,3 +15,8 @@ docker run --name myapp -p 3000:3000 myappimage
 ```
 docker exec -it redis redis-cli -a {YOUR_PASSWORD}
 ```
+
+# TODO
+1. Profile page
+2. app.js should get redisClient from redisService.js
+3. Implement My Reports
