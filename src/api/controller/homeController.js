@@ -13,22 +13,27 @@ homeController.home = (req, res) => {
         })
 
 
-    const cookie = {};
-    if(req.cookies.app_name){
-        cookie.name = req.cookies.app_name;
+    const sessionStorage = {};
+    if(req.session.app_name){
+        sessionStorage.name = req.session.app_name;
     }
-    if(req.cookies.app_roomnr){
-        cookie.roomnr = req.cookies.app_roomnr;
+    if(req.session.app_roomnr){
+        sessionStorage.roomnr = req.session.app_roomnr;
     }
-    res.render('home', {cookie});
+    res.render('home', {sessionStorage});
 };
 
-homeController.sendReport = (req, res) => {
+homeController.sendReport = (req, res, next) => {
 
-    res.cookie('app_name', req.body.name);
-    res.cookie('app_roomnr', req.body.roomnumber);
+    req.session.app_name =  req.body.name;
+    req.session.app_roomnr = req.body.roomnumber;
     
-    res.render('success');
+    req.session.save((err) => {
+        if (err) {
+            console.log('FEHLER ' + error);
+        }
+        res.render('success');
+    });
 };
 
 homeController.login = (req, res) => {

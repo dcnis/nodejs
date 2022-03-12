@@ -49,12 +49,12 @@
             <form action="/sendReport" method="POST">
                 <div class="mb-3">
                     <label for="name=" class="form-label">Name / 您的姓名</label>
-                    <input class="form-control" name="name" type="text" placeholder="请输入您姓名 / Please enter your full name" value = "<%= cookie.name %>" aria-label="default input example">
+                    <input class="form-control" name="name" type="text" placeholder="请输入您姓名 / Please enter your full name" value = "<%= sessionStorage.name %>" aria-label="default input example">
                 </div>
 
                 <div class="mb-3">
                     <label for="roomnumber" class="form-label">Room number / 您的房号</label>
-                    <input class="form-control" type="number" name="roomnumber" placeholder="请输入您房号 / Please enter your room number" value = "<%= cookie.roomnr %>" aria-label="default input example">
+                    <input class="form-control" type="number" name="roomnumber" placeholder="请输入您房号 / Please enter your room number" value = "<%= sessionStorage.roomnr %>" aria-label="default input example">
                 </div>
 
                 <div class="mb-3">
