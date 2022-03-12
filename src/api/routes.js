@@ -4,6 +4,8 @@ import userController from './controller/userController.js';
 import reportController from './controller/reportController.js';
 import homeController from './controller/homeController.js';
 import errorController from './controller/errorController.js';
+import loginController from './controller/loginController.js';
+import signupController from './controller/signupController.js';
 
 
 const router = express.Router();
@@ -20,13 +22,19 @@ router.get('/user/:userId', userController.getUserByUserId);
 router.post('/report/add', reportController.addReport);
 router.get('/report/getAll', reportController.getAll);
 
+/* loginController */
+router.get('/login', loginController.loginPage);
+router.post('/login', loginController.login);
+
+/* signupController */
+router.get('/signup', signupController.signupPage);
+router.post('/signup', signupController.signup);
+
 /* homeController */
 router.post('/sendReport', homeController.sendReport);
-router.get('/login', homeController.loginPage);
 router.get('/logout', homeController.logoutPage);
-router.get('/signup', homeController.signupPage);
-router.post('/signup', homeController.signup);
 router.get('/', homeController.home);
+
 
 router.use(errorController.error404);
 

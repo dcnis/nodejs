@@ -9,6 +9,7 @@
     "start": "nodemon --inspect=0.0.0.0:9229 ./src/server.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
     "connect-redis": "^5.0.0",
     "dotenv": "^16.0.0",

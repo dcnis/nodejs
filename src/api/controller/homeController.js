@@ -1,5 +1,4 @@
 import db from '../../config/mysql/database.js';
-import signupService from '../../services/signupService.js';
 
 const homeController = {};
 
@@ -37,25 +36,8 @@ homeController.sendReport = (req, res, next) => {
     });
 };
 
-homeController.loginPage = (req, res) => {
-    return res.render('login');
-};
-
 homeController.logoutPage = (req, res) => {
     return res.render('logout');
-};
-
-homeController.signupPage = (req, res) => {
-    return res.render('signup');
-};
-
-homeController.signup = (req, res) => {
-    signupService.signup(req.body)
-        .then((response) => {
-            console.log(response);
-            res.redirect('/login');
-        })
-        .catch((error) => console.log(error));
 };
 
 export default homeController;
