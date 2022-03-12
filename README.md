@@ -11,3 +11,7 @@ docker build -t myappimage .
 docker run --name myapp -p 3000:3000 myappimage
 ```
 
+# Connect to redis docker container
+```
+docker exec -it redis redis-cli -a {YOUR_PASSWORD}
+```
