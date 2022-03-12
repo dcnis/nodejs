@@ -23,6 +23,7 @@ homeController.home = (req, res) => {
     if(req.session.isAuthenticated){
         sessionStorage.isAuthenticated = true;
     }
+
     res.render('home', {sessionStorage});
 };
 
@@ -37,7 +38,7 @@ homeController.sendReport = (req, res, next) => {
         }
 
         const isAuth = req.session.isAuthenticated;
-        res.render('success', {isAuth});
+        res.render('success', {isAuth });
     });
 };
 

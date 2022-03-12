@@ -1,0 +1,16 @@
+
+
+.user-message {
+    margin: auto;
+    width: 90%;
+    border: 1px solid rgb(25, 25, 248);
+    background: rgb(75, 75, 241);
+    padding: 1rem;
+    border-radius: 3px;
+    text-align: center
+}
+
+.user-message-error {
+    border-color: red;
+    background: rgba(255, 166, 166, 0.795);
+}

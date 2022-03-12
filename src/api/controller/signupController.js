@@ -9,7 +9,6 @@ signupController.signupPage = (req, res) => {
 signupController.signup = (req, res) => {
     signupService.signup(req.body)
         .then((response) => {
-            console.log(response);
             res.redirect('/login');
         })
         .catch((error) => console.log(error));
