@@ -1,5 +1,5 @@
-INSERT INTO Users (id, first_name, last_name, email, roomnumber) VALUES (1, "Dennis", "Smith", "dennis.smith@gmail.com", 2803);
-INSERT INTO Users (id, first_name, last_name, email, roomnumber) VALUES (2, "Florian", "Geisberger", "florian.geisberger@gmail.com", 2518);
+INSERT INTO Users (id, full_name, email, roomnumber, user_password) VALUES (1, "Dennis Smith", "dennis.smith@gmail.com", 2803, "secret123");
+INSERT INTO Users (id, full_name, email, roomnumber, user_password) VALUES (2, "Florian Geisberger", "florian.geisberger@gmail.com", 2518, "moresecure");
 
 INSERT INTO Symptoms(id, description) VALUES (1, "healthy");
 INSERT INTO Symptoms(id, description) VALUES (2, "cough");

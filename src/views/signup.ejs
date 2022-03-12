@@ -47,15 +47,25 @@
               </h3>
             </figure>
 
-            <form>
+            <form action="/signup" method="POST">
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">电子邮件 / Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="请输入电子邮件 / Please enter your email" aria-describedby="emailHelp">
+                  <input type="email" class="form-control" name='email' placeholder="请输入电子邮件 / Please enter your email" aria-describedby="emailHelp">
                 </div>
-                
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">姓名 / Full name</label>
+                    <input type="text" class="form-control" name='full_name' placeholder="请输入电子邮件 / Please enter your full name" aria-describedby="emailHelp">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">房号 / Roomnumber</label>
+                    <input type="number" class="form-control" name='roomnumber' placeholder="请输入电子邮件 / Please enter your roomnumber" aria-describedby="emailHelp">
+                  </div>
+
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">密码 / Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码 / Please enter your passwort">
+                  <input type="password" class="form-control" name='password' placeholder="请输入密码 / Please enter your passwort">
                 </div>
                 
 

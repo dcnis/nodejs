@@ -4,7 +4,7 @@ const userService = {};
 
 userService.addUser = (user) => {
     return db.execute('INSERT INTO Users (first_name, last_name, email, roomnumber) VALUES (?, ?, ?, ?)',
-            [user.first_name, user.last_name, user.email, user.roomnumber])
+            [user.full_name, user.last_name, user.email, user.roomnumber])
         .then((response) => {
             return response;
         })
