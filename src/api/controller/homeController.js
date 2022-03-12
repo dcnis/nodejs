@@ -44,4 +44,8 @@ homeController.logout = (req, res) => {
     return res.render('logout');
 };
 
+homeController.signup = (req, res) => {
+    return res.render('signup');
+};
+
 export default homeController;

@@ -7,8 +7,6 @@ import bodyParser from 'body-parser';
 
 import { REDIS_PASSWORD } from './config/env.js';
 import rootDir from './util/path.js';
-import homeRouter from './api/routes/homeRoute.js';
-import errorRouter from './api/routes/errorRoute.js';
 import routes from './api/routes.js';
 
 /* Create Express server */
@@ -51,9 +49,7 @@ app.set('views', rootDir + '/views');
 
 
 /* routes */
-app.use(homeRouter);
 app.use(routes);
-app.use(errorRouter);
 
 
 export default app;
