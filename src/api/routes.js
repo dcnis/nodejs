@@ -6,6 +6,7 @@ import homeController from './controller/homeController.js';
 import errorController from './controller/errorController.js';
 import loginController from './controller/loginController.js';
 import signupController from './controller/signupController.js';
+import logoutController from './controller/logoutController.js';
 
 
 const router = express.Router();
@@ -32,7 +33,7 @@ router.post('/signup', signupController.signup);
 
 /* homeController */
 router.post('/sendReport', homeController.sendReport);
-router.get('/logout', homeController.logoutPage);
+router.get('/logout', logoutController.logout);
 router.get('/', homeController.home);
 
 

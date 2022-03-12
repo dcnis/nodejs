@@ -20,6 +20,9 @@ homeController.home = (req, res) => {
     if(req.session.app_roomnr){
         sessionStorage.roomnr = req.session.app_roomnr;
     }
+    if(req.session.isAuthenticated){
+        sessionStorage.isAuthenticated = true;
+    }
     res.render('home', {sessionStorage});
 };
 
