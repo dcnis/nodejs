@@ -7,6 +7,7 @@ import errorController from './controller/errorController.js';
 import loginController from './controller/loginController.js';
 import signupController from './controller/signupController.js';
 import logoutController from './controller/logoutController.js';
+import isAuth from '../middleware/isAuth.js';
 
 
 const router = express.Router();
@@ -22,6 +23,7 @@ router.get('/user/:userId', userController.getUserByUserId);
 /* reportController */
 router.post('/report/add', reportController.addReport);
 router.get('/report/getAll', reportController.getAll);
+router.get('/report/myreports', isAuth, reportController.myReportsPage);
 
 /* loginController */
 router.get('/login', loginController.loginPage);

@@ -29,11 +29,15 @@ reportController.getReportsByUserId = (req, res) => {
 
 
 reportController.getReportsByUserEmail = (req, res) => {
-    
+    res.render('myReports');
 };
 
 reportController.deleteReportById = (req, res) => {
     
 };
+
+reportController.myReportsPage = (req, res) => {
+    res.render('myReports');
+}
 
 export default reportController;
