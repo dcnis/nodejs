@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator';
 
 
 const validateSignup = [
-    check('email').isEmail().withMessage('Please enter a valid email!'),
+    check('email').isEmail().withMessage('Please enter a valid email!').normalizeEmail(),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

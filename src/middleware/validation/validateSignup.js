@@ -3,8 +3,8 @@ import { validationResult } from 'express-validator';
 
 
 const validateSignup = [
-    check('email').isEmail().withMessage('Please enter a valid email!'),
-    check('full_name').isLength({min: 2}).withMessage('Name must be at least 2 characters long'),
+    check('email').isEmail().withMessage('Please enter a valid email!').normalizeEmail(),
+    check('full_name').isLength({min: 2}).withMessage('Name must be at least 2 characters long').trim(),
     check('roomnumber').isNumeric().withMessage('Roomnumber must be a number'),
     check('password').isLength({min: 6, max: 25}).withMessage('Password must be between 6 and 25 characters long'),
     (req, res, next) => {
