@@ -4,10 +4,12 @@ import redisClient from '../../services/redisService.js';
 const signupController = {};
 
 signupController.signupPage = (req, res) => {
-    return res.render('signup');
+    const errorMessage = null;
+    return res.render('signup', {errorMessage});
 };
 
 signupController.signup = (req, res) => {
+
     signupService.signup(req.body, res);
 };
 

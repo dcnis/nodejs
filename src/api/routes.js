@@ -8,6 +8,9 @@ import loginController from './controller/loginController.js';
 import signupController from './controller/signupController.js';
 import logoutController from './controller/logoutController.js';
 import isAuth from '../middleware/isAuth.js';
+import validateSignup from '../middleware/validation/validateSignup.js';
+import validateLogin from '../middleware/validation/validateLogin.js';
+import validateHome from '../middleware/validation/validateHome.js';
 
 
 const router = express.Router();
@@ -27,15 +30,15 @@ router.get('/report/myreports', isAuth, reportController.myReportsPage);
 
 /* loginController */
 router.get('/login', loginController.loginPage);
-router.post('/login', loginController.login);
+router.post('/login', validateLogin, loginController.login);
 
 /* signupController */
 router.get('/signup', signupController.signupPage);
-router.post('/signup', signupController.signup);
+router.post('/signup', validateSignup, signupController.signup);
 router.get('/signupVerification/:token', signupController.signupVerification);
 
 /* homeController */
-router.post('/sendReport', homeController.sendReport);
+router.post('/sendReport', validateHome, homeController.sendReport);
 router.get('/logout', logoutController.logout);
 router.get('/', homeController.home);
 

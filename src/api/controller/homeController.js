@@ -24,7 +24,8 @@ homeController.home = (req, res) => {
         sessionStorage.isAuthenticated = true;
     }
 
-    res.render('home', {sessionStorage});
+    const errorMessage = null;
+    res.render('home', {sessionStorage, errorMessage});
 };
 
 homeController.sendReport = (req, res, next) => {
