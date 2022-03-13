@@ -8,3 +8,4 @@ export const MYSQL_USER = process.env.MYSQL_USER;
 export const MYSQL_ROOT_PASSWORD = process.env.MYSQL_ROOT_PASSWORD;
 export const MYSQL_DB = process.env.MYSQL_DB;
 export const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
+export const JWT_SECRET = process.env.JWT_SECRET;

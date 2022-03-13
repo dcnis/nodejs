@@ -7,11 +7,13 @@ import errorController from './controller/errorController.js';
 import loginController from './controller/loginController.js';
 import signupController from './controller/signupController.js';
 import logoutController from './controller/logoutController.js';
+import adminController from './controller/adminController.js';
 import isAuth from '../middleware/isAuth.js';
 import validateSignup from '../middleware/validation/validateSignup.js';
 import validateLogin from '../middleware/validation/validateLogin.js';
 import validateHome from '../middleware/validation/validateHome.js';
 import exceptionHandler from '../middleware/exceptionHandler.js';
+import isAuthJWT from '../middleware/isAuthJWT.js';
 
 
 const router = express.Router();
@@ -37,6 +39,10 @@ router.post('/login', validateLogin, loginController.login);
 router.get('/signup', signupController.signupPage);
 router.post('/signup', validateSignup, signupController.signup);
 router.get('/signupVerification/:token', signupController.signupVerification);
+
+/* adminController */
+router.get('/admin/top-secret-info', isAuthJWT, adminController.topsecretInfo);
+
 
 /* homeController */
 router.post('/sendReport', validateHome, homeController.sendReport);

@@ -1,4 +1,6 @@
 import loginService from '../../services/loginService.js';
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../../config/env.js';
 
 const loginController = {};
 
@@ -17,6 +19,13 @@ loginController.login = (req, res, next) => {
     loginService.login(req.body)
         .then((user) => {
 
+
+            // Create JWT Token
+            const token = jwt.sign({
+                email: user.email,
+                id: user.id
+            }, JWT_SECRET, {expiresIn: '1h'})
+
             req.session.isAuthenticated = true;
             req.session.app_name = user.full_name;
             req.session.app_roomnr = user.roomnumber;
@@ -24,7 +33,7 @@ loginController.login = (req, res, next) => {
                 if(err){
                     console.log(err);
                 } else {
-                    res.redirect('/');
+                    res.status(200).json({token: token, userId: user.id});
                 }
             })
         })
