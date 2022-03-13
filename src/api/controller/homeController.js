@@ -25,7 +25,12 @@ homeController.home = (req, res) => {
     }
 
     const errorMessage = null;
-    res.render('home', {sessionStorage, errorMessage});
+    const oldInput = {
+        name: '',
+        roomnumber: '',
+        temperature: ''
+    }
+    res.render('home', {sessionStorage, errorMessage, oldInput});
 };
 
 homeController.sendReport = (req, res, next) => {

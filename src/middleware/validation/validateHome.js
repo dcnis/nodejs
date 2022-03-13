@@ -17,7 +17,12 @@ const validateHome = [
         if (!errors.isEmpty()) {
             const errorMessage = errors.array()[0].msg;
             const sessionStorage = {};
-            return res.status(422).render('home', {sessionStorage, errorMessage});
+            const oldInput = {
+                name: req.body.name,
+                roomnumber: req.body.roomnumber,
+                temperature: req.body.temperature
+            }
+            return res.status(422).render('home', {sessionStorage, errorMessage, oldInput});
         }
         next();
     }
