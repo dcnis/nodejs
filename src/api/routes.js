@@ -11,6 +11,7 @@ import isAuth from '../middleware/isAuth.js';
 import validateSignup from '../middleware/validation/validateSignup.js';
 import validateLogin from '../middleware/validation/validateLogin.js';
 import validateHome from '../middleware/validation/validateHome.js';
+import exceptionHandler from '../middleware/exceptionHandler.js';
 
 
 const router = express.Router();
@@ -42,8 +43,12 @@ router.post('/sendReport', validateHome, homeController.sendReport);
 router.get('/logout', logoutController.logout);
 router.get('/', homeController.home);
 
-
+/* errorController */
+router.get('/error500', errorController.error500);
 router.use(errorController.error404);
+
+/* exceptionHandler */
+router.use(exceptionHandler.handleException);
 
 
 export default router;

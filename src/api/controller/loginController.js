@@ -20,7 +20,6 @@ loginController.login = (req, res, next) => {
             req.session.isAuthenticated = true;
             req.session.app_name = user.full_name;
             req.session.app_roomnr = user.roomnumber;
-
             req.session.save((err) => {
                 if(err){
                     console.log(err);
@@ -30,10 +29,11 @@ loginController.login = (req, res, next) => {
             })
         })
 
-        .catch((error) => {
-            console.log(error);
-            req.flash('loginError', 'Wrong username or password');
-            res.redirect('/login');
+        .catch((err) => {
+            console.log(err);
+            const error = new Error(err);
+            error.status = 500;
+            return next(error);
         });
 };
 
