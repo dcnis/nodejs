@@ -35,6 +35,7 @@ services:
     volumes:
       - "./src:/usr/src/app/src"
       - "./logs:/usr/src/app/logs"
+      - "./cert:/usr/src/app/cert"
     depends_on:
       - mysqldb
       - redis
