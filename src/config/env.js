@@ -9,3 +9,5 @@ export const MYSQL_ROOT_PASSWORD = process.env.MYSQL_ROOT_PASSWORD;
 export const MYSQL_DB = process.env.MYSQL_DB;
 export const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
 export const JWT_SECRET = process.env.JWT_SECRET;
+export const LOG_LEVEL = process.env.LOG_LEVEL;
+export const TIMEZONE = process.env.TIMEZONE;

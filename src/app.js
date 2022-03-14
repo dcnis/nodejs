@@ -12,7 +12,8 @@ import { REDIS_PASSWORD } from './config/env.js';
 import rootDir from './util/path.js';
 import routes from './api/routes.js';
 import csrfMiddleware from './middleware/csrfMiddleware.js';
-import morganLogging from './config/logging.js';
+import morganLogging from './config/morgan.js';
+import log from './config/winston.js';
 
 /* Create Express server */
 const app = express();
@@ -35,7 +36,7 @@ const csrfProtection = csrf();
     const redisClient = redis.createClient({
         url: uri
       });
-    console.log('Connected to REDIS successfully');
+    log.info('Connected to REDIS successfully');
 
      const RedisStore = connectRedis(session);
 

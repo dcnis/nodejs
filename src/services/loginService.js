@@ -1,5 +1,6 @@
 import db from '../config/mysql/database.js';
 import bcrypt from 'bcryptjs';
+import log from '../config/winston.js';
 
 const loginService = {};
 
@@ -23,7 +24,7 @@ loginService.login = (loginData, req) => {
             })
         })
         .catch((error) => {
-            console.log(error);
+            log.info(error);
             return Promise.reject(error);
         });
     

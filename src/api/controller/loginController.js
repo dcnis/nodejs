@@ -1,6 +1,7 @@
 import loginService from '../../services/loginService.js';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../../config/env.js';
+import log from '../../config/winston.js';
 
 const loginController = {};
 
@@ -25,7 +26,7 @@ loginController.login = (req, res, next) => {
             req.session.app_roomnr = user.roomnumber;
             req.session.save((err) => {
                 if(err){
-                    console.log(err);
+                    log.error(err);
                 } else {
                     res.status(200).json({token: token, userId: user.id});
                 }
@@ -33,7 +34,7 @@ loginController.login = (req, res, next) => {
         })
 
         .catch((err) => {
-            console.log(err);
+            log.error(err);
             const error = new Error(err);
             error.status = 500;
             return next(error);

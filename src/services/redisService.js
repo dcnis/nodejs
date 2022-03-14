@@ -8,7 +8,6 @@ let redisClient = {};
     redisClient = redis.createClient({
         url: uri
       });
-    console.log('Connected to REDIS successfully');
 })();
 
 export default redisClient;
