@@ -4,13 +4,14 @@ import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import csrf from 'csurf';
+import helmet from 'helmet';
+import compression from 'compression';
 
 import redis from 'redis';
 import { REDIS_PASSWORD } from './config/env.js';
 import rootDir from './util/path.js';
 import routes from './api/routes.js';
 import csrfMiddleware from './middleware/csrfMiddleware.js';
-import flash from 'connect-flash';
 
 /* Create Express server */
 const app = express();
@@ -55,7 +56,8 @@ const csrfProtection = csrf();
 
 app.use(csrfProtection);
 app.use(csrfMiddleware);
-app.use(flash());
+app.use(helmet());
+app.use(compression());
 
 /* routes */
 app.use(routes);
