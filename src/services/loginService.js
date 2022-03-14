@@ -6,7 +6,7 @@ const loginService = {};
 loginService.login = (loginData, req) => {
     return db.execute('SELECT * FROM Users WHERE email=?', [loginData.email])
         .then((users) => {
-            if(!users || !users[0]){
+            if(!users || !users[0] || users[0].length < 1){
                 return Promise.reject('User does not exist');
             }
             

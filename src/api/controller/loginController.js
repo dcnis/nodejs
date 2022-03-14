@@ -5,13 +5,7 @@ import { JWT_SECRET } from '../../config/env.js';
 const loginController = {};
 
 loginController.loginPage = (req, res) => {
-
-    let errorMessage = req.flash('loginError');
-    if(errorMessage.length > 0){
-        errorMessage = errorMessage[0];
-    } else {
-        errorMessage = null;
-    }
+    const errorMessage = null;
     return res.render('login', { errorMessage });
 };
 
