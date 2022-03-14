@@ -12,6 +12,7 @@ import { REDIS_PASSWORD } from './config/env.js';
 import rootDir from './util/path.js';
 import routes from './api/routes.js';
 import csrfMiddleware from './middleware/csrfMiddleware.js';
+import morganLogging from './config/logging.js';
 
 /* Create Express server */
 const app = express();
@@ -58,6 +59,7 @@ app.use(csrfProtection);
 app.use(csrfMiddleware);
 app.use(helmet());
 app.use(compression());
+app.use(morganLogging)
 
 /* routes */
 app.use(routes);
