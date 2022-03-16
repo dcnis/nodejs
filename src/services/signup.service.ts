@@ -4,8 +4,9 @@ import crypto from 'crypto';
 import { Response } from 'express';
 
 import db from '../config/mysql/database.js';
-// import redisClient from './redis.service';
+import RedisClient from './redis.service.js';
 import SignupBody from '../models/signup-body.model.js';
+import log from '../config/winston.js';
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
@@ -29,17 +30,20 @@ export default class SignupService {
       const token = buffer.toString('hex');
       signupData.token = token;
 
-      // // Store potential User with Token in REDIS
-      // if (!redisClient) {
-      //   console.log('REDIS NOT INITIALIZED');
-      //   return;
-      // }
+      if (!RedisClient.isConnected()) {
+        const error = new Error('redisClient not ready');
+        throw error;
+      }
 
-      const key = 'signup:' + token;
-      const value = JSON.stringify(signupData);
+      bcrypt.hash(signupData.password, 12).then((encryptedPassword) => {
+        signupData.password = encryptedPassword;
 
-      // redisClient.SET(key, value);
-      // redisClient.EXPIRE(key, 1200);
+        const key = 'signup:' + token;
+        const value = JSON.stringify(signupData);
+
+        RedisClient.set(key, value);
+        RedisClient.expire(key, 1200);
+      });
 
       // transporter.sendMail({
       //     from: '"Fred Foo 👻" <foo@example.com>', // sender address
@@ -56,25 +60,44 @@ export default class SignupService {
     res.render('checkYourEmail');
   }
 
-  public static createUser(signupData: SignupBody) {
-    return bcrypt.hash(signupData.password, 12).then((encryptedPassword) => {
-      return db
-        .execute(
-          'INSERT INTO Users (full_name, email, roomnumber, user_password) VALUES (?, ?, ?, ?)',
-          [
-            signupData.full_name,
-            signupData.email,
-            signupData.roomnumber,
-            encryptedPassword,
-          ]
-        )
-        .then((response) => {
-          return Promise.resolve(response);
-        })
-        .catch((error) => {
-          const errorMsg = 'Error while inserting new user: ' + error;
-          return errorMsg;
-        });
+  public static verifySignup(token: string): Promise<void> {
+    // get User from REDIS via token
+    if (!RedisClient.isConnected()) {
+      const error = new Error('redisClient not ready');
+      throw error;
+    }
+
+    return RedisClient.get('signup:' + token).then((redisUser) => {
+      const userdata = JSON.parse(redisUser);
+
+      if (userdata) {
+        this.createUser(userdata)
+          .then(() => Promise.resolve())
+          .catch((err: Error) => {
+            log.error(err);
+            return err;
+          });
+      }
     });
+  }
+
+  private static createUser(signupData: SignupBody) {
+    return db
+      .execute(
+        'INSERT INTO Users (full_name, email, roomnumber, user_password) VALUES (?, ?, ?, ?)',
+        [
+          signupData.full_name,
+          signupData.email,
+          signupData.roomnumber,
+          signupData.password,
+        ]
+      )
+      .then((response) => {
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        const errorMsg = 'Error while inserting new user: ' + error;
+        return errorMsg;
+      });
   }
 }

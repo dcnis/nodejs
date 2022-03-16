@@ -20,26 +20,12 @@ export default class SignupController {
   public static signupVerification(req: Request, res: Response) {
     const token = req.params['token'];
 
-    // // get User from REDIS via token
-    // if (!redisClient) {
-    //   log.error('redisClient not ready');
-    //   return;
-    // }
-
-    // redisClient.get('signup:' + token)
-    //   .then((redisUser) => {
-    //     const userdata = JSON.parse(redisUser);
-
-    //     if (userdata) {
-    //       signupService
-    //         .createUser(userdata)
-    //         .then(() => {
-    //           res.render('signupSuccessful');
-    //         })
-    //         .catch((err: Error) => {
-    //           log.error(err);
-    //         });
-    //     }
-    // })
+    signupService.verifySignup(token)
+      .then(() => {
+        res.render('signupSuccessful');
+      })
+      .catch((error) => {
+        log.error(error);
+      });
   }
 }

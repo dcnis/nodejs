@@ -3,13 +3,11 @@ import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import compression from 'compression';
-import { createClient } from 'redis';
 
 import rootDir from './util/path.js';
 import routes from './api/routes.js';
 import morganLogging from './config/morgan';
-import env from './config/env.js';
-import log from './config/winston.js';
+import RedisCache from './services/redis.service.js';
 
 /* Create Express server */
 const app: Application = express();
@@ -26,20 +24,7 @@ app.set('views', rootDir + '/views');
 app.use(compression());
 // app.use(morganLogging());
 
-(async () => {
-  const uri = `redis://default:${env.REDIS_PASSWORD}@redis:6379`;
-  const client = createClient({
-    url: uri,
-  });
-
-  client.on('error', (err) => console.log('Redis Client Error', err));
-
-  await client.connect();
-
-  await client.set('key', 'value');
-  const value = await client.get('key');
-  log.info(value);
-})();
+RedisCache.init();
 
 /* routes */
 app.use(routes);

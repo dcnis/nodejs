@@ -1,11 +1,11 @@
 FROM node:16.14.0-slim
 
-RUN npm update -g npm
-
 WORKDIR /usr/src/app
 
+#RUN npm config set registry http://r.cnpmjs.org
+RUN npm config set registry https://registry.npm.taobao.org/
 COPY package*.json .
-RUN npm install --no-audit
+RUN npm install
 
 COPY ./nodemon.json ./
 COPY ./tsconfig.json ./
