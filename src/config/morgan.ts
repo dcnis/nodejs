@@ -8,7 +8,7 @@ import env from './env.js';
 
 const now = moment();
 const timezoneFormatted = now
-  .tz(env.TIMEZONE)
+  .tz(env.TIMEZONE!)
   .format('YYYY-MM-DD HH:mm:ss.SSS');
 
 const morganLogger = winston.createLogger({

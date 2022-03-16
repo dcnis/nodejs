@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { Response } from 'express';
 
-import db from '../config/mysql/database.js';
+import db from '../config/database.js';
 import redisClient from './redis.service.js';
 import SignupBody from '../models/signup-body.model.js';
 import log from '../config/winston.js';
@@ -44,6 +44,7 @@ export default class SignupService {
 
         redisClient.set(key, value);
         redisClient.expire(key, 1200);
+        log.info('Saved user to redis');
       });
 
       this.transporter
@@ -86,6 +87,7 @@ export default class SignupService {
 
   private static createUser(signupData: SignupBody) {
     return db
+      .getPool()
       .execute(
         'INSERT INTO Users (full_name, email, roomnumber, user_password) VALUES (?, ?, ?, ?)',
         [
@@ -95,10 +97,11 @@ export default class SignupService {
           signupData.password,
         ]
       )
-      .then((response) => {
+      .then((response: any) => {
+        log.info('Inserted user into DB');
         return Promise.resolve(response);
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         const errorMsg = 'Error while inserting new user: ' + error;
         return errorMsg;
       });

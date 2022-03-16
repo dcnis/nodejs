@@ -16,7 +16,7 @@ class LoginController {
     const body: LoginBody = req.body as LoginBody;
 
     LoginService.login(body)
-      .then((user) => {
+      .then((user: any) => {
         // Create JWT Token
         const token = jwt.sign(
           {

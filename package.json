@@ -8,8 +8,8 @@
   "license": "MIT",
   "scripts": {
     "start": "tsc && node ./dist/server.js",
-    "start:dev_1": "nodemon --inspect=0.0.0.0:9229 ./dist/server.js",
-    "start:dev": "nodemon --inspect=0.0.0.0:9229 ./src/server.ts",
+    "start:dev_1": "nodemon --inspect=0.0.0.0:9229 ./dist/app.js",
+    "start:dev": "nodemon --inspect=0.0.0.0:9229 ./src/app.ts",
     "test": "jest"
   },
   "dependencies": {

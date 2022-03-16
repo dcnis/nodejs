@@ -5,7 +5,7 @@ import userservice from '../../services/user.service.js';
 
 export default class UserController {
   public static getAll(req: Request, res: Response) {
-    userservice.getAll().then((allUser) => {
+    userservice.getAll().then((allUser: any) => {
       res.json(allUser);
     });
   }
@@ -14,7 +14,7 @@ export default class UserController {
     const body: User = req.body as User;
     userservice
       .addUser(body)
-      .then((response) => {
+      .then((response: any) => {
         return res.json(response);
       })
       .catch((error: Error) => {

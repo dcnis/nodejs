@@ -10,7 +10,7 @@ class RedisCache {
   private constructor() {}
 
   // Singleton pattern
-  public static getInstance() {
+  public static getInstance(): RedisCache {
     if (!this._instance) {
       this._instance = new RedisCache();
     }

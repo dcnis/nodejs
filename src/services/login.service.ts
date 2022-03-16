@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { FieldPacket } from 'mysql2';
 
-import db from '../config/mysql/database.js';
+import db from '../config/database.js';
 import log from '../config/winston.js';
 import User from '../models/user.model.js';
 import { UserQueries } from '../queries/user.queries.js';
@@ -10,8 +10,9 @@ import LoginBody from '../models/login-body.model.js';
 class LoginService {
   public static login(loginBody: LoginBody) {
     return db
-      .execute<User[]>(UserQueries.GetUserByEmail, [loginBody.email])
-      .then((rows: [User[], FieldPacket[]]) => {
+      .getPool()
+      .execute(UserQueries.GetUserByEmail, [loginBody.email])
+      .then((rows: any) => {
         if (!rows || !rows[0] || rows[0].length < 1) {
           return Promise.reject('User does not exist');
         }
@@ -21,7 +22,7 @@ class LoginService {
         // check password
         return bcrypt
           .compare(loginBody.password, user.user_password)
-          .then((result) => {
+          .then((result: any) => {
             if (!result) {
               return Promise.reject('Wrong password!');
             }

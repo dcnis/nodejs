@@ -6,7 +6,7 @@ import log from '../../config/winston.js';
 
 export default class ReportController {
   public static getAll(req: Request, res: Response) {
-    reportservice.getAll().then((allReports) => {
+    reportservice.getAll().then((allReports: any) => {
       res.json(allReports);
     });
   }
@@ -15,7 +15,7 @@ export default class ReportController {
     const body: Report = req.body as Report;
     return reportservice
       .addReport(body)
-      .then((response) => {
+      .then((response: any) => {
         return res.json(response);
       })
       .catch((error: Error) => {

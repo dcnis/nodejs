@@ -1,35 +1,21 @@
-import path from 'path';
-import express, { Application } from 'express';
-import bodyParser from 'body-parser';
-import helmet from 'helmet';
-import compression from 'compression';
 
-import rootDir from './util/path.js';
-import routes from './api/routes.js';
+
+import env from './config/env.js';
 import morganLogging from './config/morgan';
 import redisClient from './services/redis.service.js';
+import db from './config/database.js';
 import log from './config/winston.js';
+import createServer from './config/server.js';
 
-/* Create Express server */
-const app: Application = express();
 
-app.use(helmet());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(rootDir, 'public')));
-
-/* Set template engine */
-app.set('view engine', 'ejs');
-app.set('views', rootDir + '/views');
-
-app.use(compression());
-// app.use(morganLogging());
-
-/* routes */
-app.use(routes);
-
-redisClient.init().then(() => {
-  log.info('Redis is initializieadfasdf');
-});
-
-export default app;
+redisClient.init()
+  .then(() => db.init())
+  .then(() => createServer())
+  .then((server) => {
+    server.listen(env.PORT, (): void => {
+        log.info('server started on https://localhost:' + env.PORT);
+    });
+  })
+  .catch((error) => {
+    log.error(error);
+  });

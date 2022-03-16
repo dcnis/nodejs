@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import db from '../../config/mysql/database.js';
+import db from '../../config/database.js';
 
 class HomeController {
   public static home(req: Request, res: Response): void {
