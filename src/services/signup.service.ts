@@ -21,15 +21,15 @@ export default class SignupService {
   });
 
   public static signup(signupData: SignupBody, res: Response) {
-    // Create Token with encrypt
+    // Create unique signupHash
     crypto.randomBytes(32, (err, buffer) => {
       if (err) {
         console.log(err);
         return res.redirect('/');
       }
 
-      const token = buffer.toString('hex');
-      signupData.token = token;
+      const signupHash = buffer.toString('hex');
+      signupData.signupHash = signupHash;
 
       if (!RedisClient.isConnected()) {
         const error = new Error('redisClient not ready');
@@ -39,7 +39,7 @@ export default class SignupService {
       bcrypt.hash(signupData.password, 12).then((encryptedPassword) => {
         signupData.password = encryptedPassword;
 
-        const key = 'signup:' + token;
+        const key = 'signup:' + signupHash;
         const value = JSON.stringify(signupData);
 
         RedisClient.set(key, value);
@@ -52,8 +52,8 @@ export default class SignupService {
           to: 'bgk.dennis@yahoo.de', // list of receivers
           subject: 'Verify your email✔', // Subject line
           html: `<b>Hello Dennis! <br>
-           Please click on following link to verify your email: <a href="http://localhost:3000/signupVerification/${token}">
-           http://localhost:3000/signupVerification/${token}</a></b>`,
+           Please click on following link to verify your email: <a href="http://localhost:3000/signupVerification/${signupHash}">
+           http://localhost:3000/signupVerification/${signupHash}</a></b>`,
         })
         .catch((error) => {
           console.log('Fehler beim Senden der Email ' + error);
@@ -63,14 +63,14 @@ export default class SignupService {
     res.render('checkYourEmail');
   }
 
-  public static verifySignup(token: string): Promise<void> {
+  public static verifySignup(signupHash: string): Promise<void> {
     // get User from REDIS via token
     if (!RedisClient.isConnected()) {
       const error = new Error('redisClient not ready');
       throw error;
     }
 
-    return RedisClient.get('signup:' + token).then((redisUser) => {
+    return RedisClient.get('signup:' + signupHash).then((redisUser) => {
       const userdata = JSON.parse(redisUser);
 
       if (userdata) {

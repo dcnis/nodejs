@@ -3,5 +3,5 @@ export default interface SignupBody {
   full_name: string;
   roomnumber: number;
   password: string;
-  token: string;
+  signupHash: string;
 }

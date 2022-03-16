@@ -18,9 +18,10 @@ export default class SignupController {
   }
 
   public static signupVerification(req: Request, res: Response) {
-    const token = req.params['token'];
+    const signupHash = req.params['token'];
 
-    signupService.verifySignup(token)
+    signupService
+      .verifySignup(signupHash)
       .then(() => {
         res.render('signupSuccessful');
       })
