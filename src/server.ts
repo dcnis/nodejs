@@ -14,6 +14,8 @@ const certificate = fs.readFileSync(
   path.join(rootDir, '..', 'cert', 'server.cert')
 );
 
-http.createServer(app).listen(env.PORT, (): void => {
+const server = http.createServer(app);
+
+server.listen(env.PORT, (): void => {
   log.info('server started on https://localhost:' + env.PORT);
 });

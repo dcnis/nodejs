@@ -7,7 +7,8 @@ import compression from 'compression';
 import rootDir from './util/path.js';
 import routes from './api/routes.js';
 import morganLogging from './config/morgan';
-import RedisCache from './services/redis.service.js';
+import redisClient from './services/redis.service.js';
+import log from './config/winston.js';
 
 /* Create Express server */
 const app: Application = express();
@@ -24,9 +25,11 @@ app.set('views', rootDir + '/views');
 app.use(compression());
 // app.use(morganLogging());
 
-RedisCache.init();
-
 /* routes */
 app.use(routes);
+
+redisClient.init().then(() => {
+  log.info('Redis is initializieadfasdf');
+});
 
 export default app;

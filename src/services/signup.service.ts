@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import { Response } from 'express';
 
 import db from '../config/mysql/database.js';
-import RedisClient from './redis.service.js';
+import redisClient from './redis.service.js';
 import SignupBody from '../models/signup-body.model.js';
 import log from '../config/winston.js';
 
@@ -31,7 +31,7 @@ export default class SignupService {
       const signupHash = buffer.toString('hex');
       signupData.signupHash = signupHash;
 
-      if (!RedisClient.isConnected()) {
+      if (!redisClient.isConnected()) {
         const error = new Error('redisClient not ready');
         throw error;
       }
@@ -42,8 +42,8 @@ export default class SignupService {
         const key = 'signup:' + signupHash;
         const value = JSON.stringify(signupData);
 
-        RedisClient.set(key, value);
-        RedisClient.expire(key, 1200);
+        redisClient.set(key, value);
+        redisClient.expire(key, 1200);
       });
 
       this.transporter
@@ -65,12 +65,12 @@ export default class SignupService {
 
   public static verifySignup(signupHash: string): Promise<void> {
     // get User from REDIS via token
-    if (!RedisClient.isConnected()) {
+    if (!redisClient.isConnected()) {
       const error = new Error('redisClient not ready');
       throw error;
     }
 
-    return RedisClient.get('signup:' + signupHash).then((redisUser) => {
+    return redisClient.get('signup:' + signupHash).then((redisUser) => {
       const userdata = JSON.parse(redisUser);
 
       if (userdata) {
