@@ -21,16 +21,16 @@ const morganLogger = winston.createLogger({
           format: timezoneFormatted,
         }),
         winston.format.printf(
-          (info) => `[${info.timestamp}] ${info.level}: ${info.message}`
+          (info: any) => `[${info.timestamp}] ${info.level}: ${info.message}`
         )
       ),
     }),
   ],
 });
 
-const init = morgan('combined', {
+const init: any = morgan('combined', {
   stream: {
-    write: (message) => morganLogger.http(message.trim()),
+    write: (message: any) => morganLogger.http(message.trim()),
   },
 });
 

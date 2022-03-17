@@ -1,6 +1,7 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 export default {
   preset: 'ts-jest',
-  testEnvironment: 'node',
+  testEnvironment: 'jest-environment-node',
   testMatch: ['<rootDir>/src/tests/**/*.spec.ts'],
+  transform: {},
 };

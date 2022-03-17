@@ -11,7 +11,7 @@ const timezoneFormatted = now
   .format('YYYY-MM-DD HH:mm:ss.SSS');
 const timezone = now.tz(env.TIMEZONE as string).format();
 
-const log = winston.createLogger({
+const log: any = winston.createLogger({
   transports: [
     /* Console logger */
     new winston.transports.Console({
@@ -21,7 +21,7 @@ const log = winston.createLogger({
         }),
         winston.format.colorize(),
         winston.format.printf(
-          (info) => `[${info.timestamp}] ${info.level}: ${info.message}`
+          (info: any) => `[${info.timestamp}] ${info.level}: ${info.message}`
         )
       ),
       level: env.LOG_LEVEL,
@@ -34,7 +34,7 @@ const log = winston.createLogger({
           format: timezoneFormatted,
         }),
         winston.format.printf(
-          (info) => `[${info.timestamp}] ${info.level}: ${info.message}`
+          (info: any) => `[${info.timestamp}] ${info.level}: ${info.message}`
         )
       ),
       filename: path.join(rootDir, '..', 'logs', 'services.log'),
@@ -48,7 +48,7 @@ const log = winston.createLogger({
           format: timezoneFormatted,
         }),
         winston.format.printf(
-          (info) => `[${info.timestamp}] ${info.level}: ${info.message}`
+          (info: any) => `[${info.timestamp}] ${info.level}: ${info.message}`
         )
       ),
       filename: path.join(rootDir, '..', 'logs', 'error.log'),
